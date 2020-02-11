@@ -73,7 +73,35 @@ namespace ConsoleApp1
             //a %= 3;// a= a % 5;
             //Console.WriteLine(a);
 
+            int a = 5;
 
+            if(a==5)
+            {
+
+            }
+            else if(a==6)
+            {
+
+            }
+            else if(a==7)
+            {
+
+            }
+            else
+            {
+
+            }
+            switch(a)
+            {
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
