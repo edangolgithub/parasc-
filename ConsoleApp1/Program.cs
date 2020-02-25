@@ -12,9 +12,24 @@ namespace ConsoleApp1
         static void Main()
         {
 
-            functions.makemomo(4,4,3);
+            Vehicle v = new Vehicle();
+            v.color = "black";
+            v.country = "japan";
+            v.model = "toyota";
+            v.price = 100000;
+            v.wheels = 4;
+            v.start();
+            v.stop();
+            v.display();
 
-
+            Vehicle v1 = new Vehicle();
+            v1.color = "red";
+            v1.model = "ferrari";
+            v1.country = "italy";
+            v1.wheels = 4;
+            v1.refuel();
+            v1.start();
+            v1.display();
         }
 
 

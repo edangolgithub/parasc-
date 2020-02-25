@@ -29,6 +29,49 @@ namespace ConsoleApp1
             Console.WriteLine(" you can make {0} plates of MoMo with"
                 + "{1} kilo pitho with {2} gram masala and {3} kg keema", momo, pitho, masala, keema);
         }
-        
+        // int float double string bool decimal char
+        public static int makedouble()
+        {
+            //code
+            int x = 10;
+            int y = 30;
+            int z = x + y;
+          
+            return z;
+
+        }
+
+        public static bool isprime(int x)
+        {
+
+            for (int i = 2; i < x-1; i++)
+            {
+                if(x%i==0)
+                {
+                    return false;
+                }
+            }
+
+
+            return true;
+        }
+
+        public static void printmsg(string msg="hi")
+        {
+            Console.WriteLine(msg);
+        }
+        public static void abc(int x,int y,int z)
+        {
+
+        }
+        public static void abc(int x,int sad)
+        {
+
+        }
+        public static void abc(int x, double sad)
+        {
+
+        }
+
     }
 }
