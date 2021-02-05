@@ -11,4 +11,14 @@ The tradeoff is that you’ll have to drill down to a subfolder in order to reac
 
 serverless create --template aws-nodejs
 
+sls invoke local -f hello
+
+sls: This is just a shortcut for serverless.
+local: Your function runs on your local machine. Don’t worry, it’s not touching AWS at this point.
+-f hello: You use the function flag and specify hello as an argument.
+
+
+sls deploy
+
+sls invoke -f hello
 ```

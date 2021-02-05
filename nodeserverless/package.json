@@ -1,0 +1,22 @@
+{
+  "name": "serverless",
+  "version": "1.0.0",
+  "description": "``` npm install -g serverless Pro tip: You can install the NPM module local to your project, instead of globally.",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edangolgithub/serverless.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edangolgithub/serverless/issues"
+  },
+  "homepage": "https://github.com/edangolgithub/serverless#readme",
+  "dependencies": {
+    "aws-sdk": "^2.838.0"
+  }
+}
