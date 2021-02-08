@@ -35,5 +35,3 @@ resources:
       Type: "AWS::S3::Bucket"
       Properties:
         BucketName: ${self:custom.bucket}
-
-        curl -H "Content-type: application/json" -d '{"photoUrl":"https://www.w3schools.com/howto/img_forest.jpg"}' 'https://g43pwzpe2j.execute-api.us-east-1.amazonaws.com/dev/upload'
