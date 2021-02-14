@@ -180,7 +180,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/interest-cron/dev/1612782942326-2021-02-08T11:15:42.326Z/interest-cron.zip"
+          "S3Key": "serverless/interest-cron/dev/1612866925887-2021-02-09T10:35:25.887Z/interest-cron.zip"
         },
         "Handler": "handler.handler",
         "Runtime": "nodejs12.x",
@@ -203,14 +203,14 @@
         "CronjobLogGroup"
       ]
     },
-    "CronjobLambdaVersionSksx7CkU7J92i9wYpWkkZKaQCZm0jLkTwFl8Fjwo": {
+    "CronjobLambdaVersionq8tBhNY6j04blqz4XKRXm3QZDdQqMF5KJiNVUB3P1E": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CronjobLambdaFunction"
         },
-        "CodeSha256": "b3F4LEyoPETqBZSG5Afd8vsjlZot/xXlODLJJkMSmt4="
+        "CodeSha256": "D78MmNPWIBieWb3B9HoQ8Snjx/3UfPpD08AbhK3wVHY="
       }
     },
     "ApiGatewayRestApi": {
@@ -329,7 +329,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1612782888265": {
+    "ApiGatewayDeployment1612866898242": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -411,7 +411,7 @@
     "CronjobLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CronjobLambdaVersionSksx7CkU7J92i9wYpWkkZKaQCZm0jLkTwFl8Fjwo"
+        "Ref": "CronjobLambdaVersionq8tBhNY6j04blqz4XKRXm3QZDdQqMF5KJiNVUB3P1E"
       }
     },
     "ServiceEndpoint": {

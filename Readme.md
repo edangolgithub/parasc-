@@ -21,4 +21,33 @@ local: Your function runs on your local machine. Don’t worry, it’s not touch
 sls deploy
 
 sls invoke -f hello
+sls offline start
+sls package
+npm prune
+npm i -D serverless-webpack webpack
+
+const slsw = require('serverless-webpack');
+module.exports = {
+  target: 'node',
+  entry: slsw.lib.entries,
+  mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
+  node: false,
+  optimization: {
+    minimize: false,
+  },
+  devtool: 'inline-cheap-module-source-map',
+};
+
+String Data Example:
+
+serverless invoke --function functionName --stage dev --region us-east-1 --data "hello world"
+
+JSON Data Example:
+
+serverless invoke --function functionName --stage dev --region us-east-1 --data '{ "property1": "value"}'
+
+JSON Data from file:
+
+serverless invoke --function functionName --stage dev --region us-east-1 --path lib/data.json
+
 ```

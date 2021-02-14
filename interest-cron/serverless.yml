@@ -26,7 +26,10 @@ custom:
       port: 8000
       inMemory: true
       migrate: true
-  
+package:
+  exclude:
+    - '.dynamodb/**'   
+
 provider:
   name: aws
   runtime: nodejs12.x
@@ -74,8 +77,9 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.tableName}
-plugins:
-  - serverless-dynamodb-local
+plugins: 
+  - serverless-webpack
+#  - serverless-dynamodb-local
   - serverless-offline
 
 # you can overwrite defaults here
