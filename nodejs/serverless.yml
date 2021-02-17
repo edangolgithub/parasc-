@@ -21,6 +21,10 @@ provider:
 functions:
   UploadImage:
     handler: uploadImage.handler
+  listbuck:
+    handler: handler.listbuck
+  ex:
+    handler: dynamo.handler
     # The `events` block defines how to trigger the uploadImage.handler code
     events:
       - http:
