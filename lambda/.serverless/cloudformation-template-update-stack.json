@@ -176,7 +176,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/lambda/dev/1613281656581-2021-02-14T05:47:36.581Z/lambda.zip"
+          "S3Key": "serverless/lambda/dev/1613358686206-2021-02-15T03:11:26.206Z/lambda.zip"
         },
         "Handler": "handler.start",
         "Runtime": "nodejs12.x",
@@ -199,14 +199,14 @@
         "StartLogGroup"
       ]
     },
-    "StartLambdaVersionPAjqFnQPQBj5X1ia8ZBZinqzTdCjm7Rbgs5pybLpY": {
+    "StartLambdaVersion4DhKg7ldAL6aLLLHTMw4TISMdF8DbKOKO4K3xwRDm0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "StartLambdaFunction"
         },
-        "CodeSha256": "kivnJgQAp99dk+DMXxo+cfTJiBimCtxG9K4c+TXa9cc="
+        "CodeSha256": "ZCOaIYU2pbci+2WRKYl/BTTHr4gyaYAd+Wk3CGd1p9w="
       }
     }
   },
@@ -219,7 +219,7 @@
     "StartLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "StartLambdaVersionPAjqFnQPQBj5X1ia8ZBZinqzTdCjm7Rbgs5pybLpY"
+        "Ref": "StartLambdaVersion4DhKg7ldAL6aLLLHTMw4TISMdF8DbKOKO4K3xwRDm0"
       }
     }
   }

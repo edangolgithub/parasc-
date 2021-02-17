@@ -79,7 +79,7 @@ async function updateitems(element) {
     var params = {
       TableName: TRANSACTIONS_TABLE,
       Key: {
-        "id": element.id,
+        "accountid": element.accountid,
         "created": element.created
       },
       UpdateExpression: "set islatest = :val",
@@ -120,9 +120,11 @@ module.exports.start =  (event) => {
           {
             "created": new Date().toISOString(),
             "balance": Number(bsum.toFixed(2)),
+            "accountname" :element.accountname,
             "accountid": element.accountid,
             "entry": element.entry,
             "accounttypeid": element.accounttypeid,
+            "accounttype" : element.accounttype,
             "amount": 0,
             "id": uuid.v4(),
             "type": element.type,
@@ -142,7 +144,7 @@ module.exports.start =  (event) => {
             var params = {
               TableName: TRANSACTIONS_TABLE,
               Key: {
-                "id": element.id,
+                "accountid": element.accountid,
                 "created": element.created
               },
               UpdateExpression: "set islatest = :val",
