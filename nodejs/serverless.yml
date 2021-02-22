@@ -4,6 +4,8 @@ service: ImageUploaderService
 # The `provider` block defines where your service will be deployed
 custom:
   bucket: asdfbc6543n
+custom:
+  tableName: 'todos-${self:provider.stage}'
 provider:
   name: aws
   runtime: nodejs12.x
