@@ -10,6 +10,7 @@ The tradeoff is that you’ll have to drill down to a subfolder in order to reac
  ./node_modules/serverless/bin/serverless
 
 serverless create --template aws-nodejs
+sls create -n ngopython -t aws-python3
 
 sls invoke local -f hello
 
