@@ -57,7 +57,23 @@ serverless invoke --function functionName --stage dev --region us-east-1 --path 
 npm install --save-dev serverless-wsgi serverless-python-requirements
 
 ```
+```
+npm install serverless-dotenv-plugin --save-dev
 
+#### .env file
+STAGE=dev
+SECRET=**********
+
+
+#### yml
+provider: 
+  name: aws 
+  runtime: nodejs10.x
+  stage: ${env:STAGE}
+  region: eu-central-1 
+  environment:
+   SECRET: ${env:SECRET}
+```
 
 
 
