@@ -25,7 +25,7 @@ provider:
   runtime: python3.8
   lambdaHashingVersion: 20201221
   region: us-east-1
-  deploymentBucket: "ed2021"
+  deploymentBucket: ed2021
   iamRoleStatements:
     - Effect: Allow
       Action:
