@@ -18,4 +18,4 @@ functions:
             method: ANY 
 plugins:
   - serverless-offline
-     noPrependStageInUrl: true
+     noPrependStageInUrl:true

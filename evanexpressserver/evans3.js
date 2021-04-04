@@ -13,7 +13,7 @@ const s3 = new AwsS3({
 
 // // Create S3 service object
 // s3 = new AWS.S3();
-
+const BUCKET_NAME = 'ed2021';
 export async function listbuckets() {
     // Call S3 to list the buckets
     return s3.listBuckets(function (err, data) {

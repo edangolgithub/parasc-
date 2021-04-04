@@ -8,4 +8,5 @@ module.exports = {
     minimize: false,
   },
   devtool: 'inline-cheap-module-source-map',
+  stats:'errors-warnings'
 };

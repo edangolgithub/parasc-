@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: ngopython
+service: slslambda
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -22,39 +22,29 @@ frameworkVersion: '2'
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: dotnetcore3.1
   lambdaHashingVersion: 20201221
-  region: us-east-1
-  deploymentBucket: "ed2021"
+  deploymentBucket:
+    name: evandangol
   iamRoleStatements:
-    - Effect: Allow
+    - Effect: "Allow"
       Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
+        - "*"
       Resource: "*"
-        
 
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
-
-# you can add packaging information here
-#package:
-#  include:
-#    - include-me.py
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.py
-#    - exclude-me-dir/**
+package:
+  individually: true
 
 functions:
   hello:
-    handler: handler.start
+    handler: CsharpHandlers::AwsDotnetCsharp.Handler::Hello
+
+    # you can add packaging information here
+    package:
+      artifact: bin/Release/netcoreapp3.1/hello.zip
+    #  exclude:
+    #    - exclude-me.js
+    #    - exclude-me-dir/**
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
