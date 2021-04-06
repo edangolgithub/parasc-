@@ -1,15 +1,16 @@
 'use strict';
-const mod = require('./evans3.js')
+
 const serverless = require('serverless-http');
 const express = require('express')
 const app = express()
 var cors = require('cors')
 const fileUpload = require('express-fileupload');
-
-//var multer = require('multer')
-//var upload = multer({ dest: 'uploads/' })
-
 var AwsS3 = require('aws-sdk/clients/s3');
+
+const mod = require('./modules/evans3.js')
+const es33 = require("./modules/s3.js")
+const evan= require("./modules/evan.js")
+
 const es3 = new AwsS3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_KEY,
@@ -17,11 +18,8 @@ const es3 = new AwsS3({
 });
 
 
-const es33 = require("./s3.js")
-//const AWS = require('aws-sdk');
-//const express = __non_webpack_require__('express');
 
-// enable files upload
+
 app.use(fileUpload({
   createParentPath: true
 }));
@@ -33,6 +31,9 @@ app.use(express.json());
 // app.get('/',async function (req, res) {
 //   res.send("hello");
 // });
+
+app.get('/', (req, res) => res.send('Hello World!'))
+
 app.get('/list', async function (req, res) {
   var data = await mod.listbuckets()
   console.log(data)
@@ -42,13 +43,19 @@ app.get("/user/:userName", async (req, res) => {
   res.send(`Welcome, ${req.params.userName}`);
 })
 
-app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/createbucket/:bucketname', (req, res) => {
   console.log(req)
   var data = es33.createBucket(req.params.bucketname)
   console.log(data)
   res.send("ok")
+
+})
+
+app.get('/promise',async (req, res) => {
+ 
+  var data =await evan.func1();
+  res.send(data)
 
 })
 app.post('/user', (req, res) => {

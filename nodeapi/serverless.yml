@@ -15,13 +15,8 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - "*"
-      Resource: "*"
-       
-    - Effect: Allow
-      Action:
         - s3:*       
-      Resource: "*"
+      Resource: "arn:aws:s3:::evandangol"
  
 functions:
   start:
