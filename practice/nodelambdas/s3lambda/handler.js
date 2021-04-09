@@ -1,10 +1,12 @@
 'use strict';
-
+const files=require("./file")
 module.exports.hello = async (event) => {
+  const data=files.asyncread();
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
+        data:data.toString(),
         message: 'Go Serverless v1.0! Your function executed successfully!',
         input: event,
       },

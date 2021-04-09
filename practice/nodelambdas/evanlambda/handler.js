@@ -1,8 +1,11 @@
 'use strict';
+const file=require("./modules/file")
 
 module.exports.start = async (event) => {
- 
- var data=event.body? JSON.parse(event.body):event;
+
+  var data = event.body ? JSON.parse(event.body) : event;
+
+  resolvefunction(data);
 
   return {
     statusCode: 200,
@@ -15,7 +18,15 @@ module.exports.start = async (event) => {
       2
     ),
   };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };
+function resolvefunction(data) {
+  switch (data.fun) {
+    case "listbuckets":
+      file.asyncread();
+      break;
+
+    default:
+      console.log("bb")
+      break;
+  }
+}
