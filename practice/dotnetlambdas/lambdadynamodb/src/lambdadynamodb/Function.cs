@@ -20,7 +20,7 @@ namespace lambdadynamodb
             foreach (var record in dynamoEvent.Records)
             {
                 Console.WriteLine(record.AwsRegion);
-                context.Logger.LogLine(record.Dynamodb..EventName);
+                context.Logger.LogLine(record.Dynamodb.ToString());
                 context.Logger.LogLine($"Event ID: {record.EventID}");
                 context.Logger.LogLine($"Event Name: {record.EventName}");
 
