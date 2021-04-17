@@ -1,8 +1,8 @@
 {
   "service": {
-    "service": "serverless-flask",
+    "service": "serverless-flaskhttp",
     "serviceObject": {
-      "name": "serverless-flask"
+      "name": "serverless-flaskhttp"
     },
     "provider": {
       "name": "aws",
@@ -43,7 +43,7 @@
           "AppLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/serverless-flask-dev-app"
+              "LogGroupName": "/aws/lambda/serverless-flaskhttp-dev-app"
             }
           },
           "IamRoleLambdaExecution": {
@@ -71,7 +71,7 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "serverless-flask",
+                        "serverless-flaskhttp",
                         "dev",
                         "lambda"
                       ]
@@ -88,7 +88,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-flask-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-flaskhttp-dev*:*"
                           }
                         ]
                       },
@@ -99,7 +99,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-flask-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/serverless-flaskhttp-dev*:*:*"
                           }
                         ]
                       },
@@ -121,7 +121,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "serverless-flask",
+                    "serverless-flaskhttp",
                     "dev",
                     {
                       "Ref": "AWS::Region"
@@ -137,11 +137,11 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "evandangol",
-                "S3Key": "serverless/serverless-flask/dev/1616840177910-2021-03-27T10:16:17.910Z/serverless-flask.zip"
+                "S3Key": "serverless/serverless-flaskhttp/dev/1618632541728-2021-04-17T04:09:01.728Z/serverless-flaskhttp.zip"
               },
               "Handler": "wsgi_handler.handler",
               "Runtime": "python3.6",
-              "FunctionName": "serverless-flask-dev-app",
+              "FunctionName": "serverless-flaskhttp-dev-app",
               "MemorySize": 1024,
               "Timeout": 6,
               "Role": {
@@ -155,7 +155,7 @@
               "AppLogGroup"
             ]
           },
-          "AppLambdaVersionD5ow8Kh1oFDUgn2djB05Nwx2iXwj1VkjHxuD1GWH8IE": {
+          "AppLambdaVersionp5gcWb8KxMwOksrJUfJwXL8IoTNIxueMheRk9n8kQ0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
@@ -165,136 +165,27 @@
               "CodeSha256": "iplYPskcW4Z3N3IyaJgg1eK6h6jpm3J/e15XY/G4Wqk="
             }
           },
-          "ApiGatewayRestApi": {
-            "Type": "AWS::ApiGateway::RestApi",
+          "HttpApi": {
+            "Type": "AWS::ApiGatewayV2::Api",
             "Properties": {
-              "Name": "dev-serverless-flask",
-              "EndpointConfiguration": {
-                "Types": [
-                  "EDGE"
-                ]
-              },
-              "Policy": ""
+              "Name": "dev-serverless-flaskhttp",
+              "ProtocolType": "HTTP"
             }
           },
-          "ApiGatewayResourceProxyVar": {
-            "Type": "AWS::ApiGateway::Resource",
+          "HttpApiStage": {
+            "Type": "AWS::ApiGatewayV2::Stage",
             "Properties": {
-              "ParentId": {
-                "Fn::GetAtt": [
-                  "ApiGatewayRestApi",
-                  "RootResourceId"
-                ]
+              "ApiId": {
+                "Ref": "HttpApi"
               },
-              "PathPart": "{proxy+}",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
+              "StageName": "$default",
+              "AutoDeploy": true,
+              "DefaultRouteSettings": {
+                "DetailedMetricsEnabled": false
               }
             }
           },
-          "ApiGatewayMethodAny": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "HttpMethod": "ANY",
-              "RequestParameters": {},
-              "ResourceId": {
-                "Fn::GetAtt": [
-                  "ApiGatewayRestApi",
-                  "RootResourceId"
-                ]
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "AppLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
-            }
-          },
-          "ApiGatewayMethodProxyVarAny": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "HttpMethod": "ANY",
-              "RequestParameters": {},
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceProxyVar"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "AppLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
-            }
-          },
-          "ApiGatewayDeployment1616840171272": {
-            "Type": "AWS::ApiGateway::Deployment",
-            "Properties": {
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "StageName": "dev"
-            },
-            "DependsOn": [
-              "ApiGatewayMethodAny",
-              "ApiGatewayMethodProxyVarAny"
-            ]
-          },
-          "AppLambdaPermissionApiGateway": {
+          "AppLambdaPermissionHttpApi": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
@@ -323,13 +214,48 @@
                     },
                     ":",
                     {
-                      "Ref": "ApiGatewayRestApi"
+                      "Ref": "HttpApi"
                     },
-                    "/*/*"
+                    "/*"
                   ]
                 ]
               }
             }
+          },
+          "HttpApiIntegrationApp": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"AppLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 6500
+            }
+          },
+          "HttpApiRouteDefault": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "$default",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationApp"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationApp"
           }
         },
         "Outputs": {
@@ -339,18 +265,24 @@
           "AppLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AppLambdaVersionD5ow8Kh1oFDUgn2djB05Nwx2iXwj1VkjHxuD1GWH8IE"
+              "Ref": "AppLambdaVersionp5gcWb8KxMwOksrJUfJwXL8IoTNIxueMheRk9n8kQ0"
             }
           },
-          "ServiceEndpoint": {
-            "Description": "URL of the service endpoint",
+          "HttpApiId": {
+            "Description": "Id of the HTTP API",
+            "Value": {
+              "Ref": "HttpApi"
+            }
+          },
+          "HttpApiUrl": {
+            "Description": "URL of the HTTP API",
             "Value": {
               "Fn::Join": [
                 "",
                 [
                   "https://",
                   {
-                    "Ref": "ApiGatewayRestApi"
+                    "Ref": "HttpApi"
                   },
                   ".execute-api.",
                   {
@@ -359,8 +291,7 @@
                   ".",
                   {
                     "Ref": "AWS::URLSuffix"
-                  },
-                  "/dev"
+                  }
                 ]
               ]
             }
@@ -391,19 +322,17 @@
         "handler": "wsgi_handler.handler",
         "events": [
           {
-            "http": "ANY /"
-          },
-          {
-            "http": "ANY {proxy+}"
+            "httpApi": "*",
+            "resolvedMethod": "ANY"
           }
         ],
-        "name": "serverless-flask-dev-app",
+        "name": "serverless-flaskhttp-dev-app",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "python3.6",
         "vpc": {},
-        "versionLogicalId": "AppLambdaVersionD5ow8Kh1oFDUgn2djB05Nwx2iXwj1VkjHxuD1GWH8IE"
+        "versionLogicalId": "AppLambdaVersionp5gcWb8KxMwOksrJUfJwXL8IoTNIxueMheRk9n8kQ0"
       }
     },
     "configValidationMode": "warn",
@@ -430,8 +359,8 @@
           "serverless_wsgi.py",
           ".serverless-wsgi"
         ],
-        "artifact": "/home/ec2-user/serverless/pythonapi/.serverless/serverless-flask.zip",
-        "artifactDirectoryName": "serverless/serverless-flask/dev/1616840177910-2021-03-27T10:16:17.910Z"
+        "artifact": "/home/ec2-user/serverless/practice/pythonapi/flaskapi1/.serverless/serverless-flaskhttp.zip",
+        "artifactDirectoryName": "serverless/serverless-flaskhttp/dev/1618632541728-2021-04-17T04:09:01.728Z"
       },
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
@@ -441,10 +370,10 @@
       }
     },
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "/home/ec2-user/serverless/pythonapi/.serverless/serverless-flask.zip"
+    "artifact": "/home/ec2-user/serverless/practice/pythonapi/flaskapi1/.serverless/serverless-flaskhttp.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/serverless-flask/dev/1616840177910-2021-03-27T10:16:17.910Z",
-    "artifact": "serverless-flask.zip"
+    "artifactDirectoryName": "serverless/serverless-flaskhttp/dev/1618632541728-2021-04-17T04:09:01.728Z",
+    "artifact": "serverless-flaskhttp.zip"
   }
 }

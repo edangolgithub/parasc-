@@ -45,5 +45,5 @@ functions:
   app:
     handler: wsgi_handler.handler
     events:
-      - httpApi: *
+      - httpApi: "*"
      

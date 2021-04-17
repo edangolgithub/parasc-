@@ -47,6 +47,7 @@ namespace lambdadynamodb.Tests
             function.FunctionHandler(evnt, context);
 
             var testLogger = context.Logger as TestLambdaLogger;
+            Console.WriteLine(testLogger);
 			Assert.Contains("Stream processing complete", testLogger.Buffer.ToString());
         }  
     }

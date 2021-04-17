@@ -28,6 +28,7 @@ namespace lambda2.Tests
             (pay, context);
            Console.Write(response.Body);
             //Assert.Equal("HELLO WORLD", upperCase);
+    
         }
     }
 }

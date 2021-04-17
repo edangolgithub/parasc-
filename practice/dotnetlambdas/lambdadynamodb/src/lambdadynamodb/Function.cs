@@ -16,13 +16,15 @@ namespace lambdadynamodb
         public void FunctionHandler(DynamoDBEvent dynamoEvent, ILambdaContext context)
         {
             context.Logger.LogLine($"Beginning to process {dynamoEvent.Records.Count} records...");
-
+            context.Logger.LogLine("what ever");
             foreach (var record in dynamoEvent.Records)
             {
+                Console.WriteLine(record.AwsRegion);
+                context.Logger.LogLine(record.Dynamodb..EventName);
                 context.Logger.LogLine($"Event ID: {record.EventID}");
                 context.Logger.LogLine($"Event Name: {record.EventName}");
-				
-				// TODO: Add business logic processing the record.Dynamodb object.
+
+                // TODO: Add business logic processing the record.Dynamodb object.
             }
 
             context.Logger.LogLine("Stream processing complete.");
