@@ -53,12 +53,12 @@ package:
   individually: true
 
 functions:
-  hello:
-    handler: CsharpHandlers::AwsDotnetCsharp.Handler::Hello
+  FunctionHandler:
+    handler: CsharpHandlers::AwsDotnetCsharp.Handler::FunctionHandler
 
     # you can add packaging information here
     package:
-      artifact: bin/Release/netcoreapp3.1/hello.zip
+      artifact: bin/Release/netcoreapp3.1/FunctionHandler.zip
     #  exclude:
     #    - exclude-me.js
     #    - exclude-me-dir/**
