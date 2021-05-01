@@ -77,6 +77,17 @@ provider:
   region: eu-central-1 
   environment:
    SECRET: ${env:SECRET}
+   
+   
+   
+   deploymentBucket: evanlambdas
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*       
+      Resource: "*"
+   
+   
 ```
 
 
