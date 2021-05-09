@@ -1,0 +1,9 @@
+{
+    "fun":"listbuckets",
+    "top":"value",
+    "cat":2,
+    "arr":{
+        "data":"payload",
+        "dem":["rm","yg","st"]
+    }
+}

@@ -1,0 +1,32 @@
+service: evanexpressserver
+
+frameworkVersion: '2'
+
+custom:
+  serverless-offline:
+    noPrependStageInUrl: true
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  region: us-east-1
+  
+  deploymentBucket: evandangol
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:*       
+      Resource: "arn:aws:s3:::evandangol"
+ 
+functions:
+  start:
+    handler: server.start
+#    The following are a few example events you can configure
+#    NOTE: Please make sure to change your handler code to work with those events
+#    Check the event documentation for details
+    events:
+      - http: ANY /
+      - http: 'ANY /{proxy+}'
+plugins: 
+  - serverless-webpack
+  - serverless-offline

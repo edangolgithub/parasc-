@@ -1,0 +1,56 @@
+service: dynamo-node
+
+custom:
+  tableName: 'todos-${self:provider.stage}'
+  serverless-offline:
+    noPrependStageInUrl: true
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - { "Fn::GetAtt": ["TodosDynamoDBTable", "Arn" ] }
+  environment:
+    TODOS_TABLE: ${self:custom.tableName}
+
+functions:
+  todo-app:
+    handler: index.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+
+resources:
+  Resources:
+    TodosDynamoDBTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: todoId
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: todoId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.tableName}
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+  

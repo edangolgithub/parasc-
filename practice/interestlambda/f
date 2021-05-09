@@ -1,0 +1,11 @@
+{"date": "02-11-2021",
+      "balance": "100",
+      "accountid": "123456789",
+      "entry": "debit",
+      "accounttypeid": "1",
+      "amount": "100",
+      "id": "6a409785-521c-451d-a72a-96872d84da11",
+      "type": "cash",
+      "interest": "0"
+  
+}

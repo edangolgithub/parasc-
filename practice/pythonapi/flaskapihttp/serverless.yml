@@ -1,0 +1,49 @@
+# serverless.yml
+
+service: serverless-flaskhttp
+
+plugins:
+  - serverless-python-requirements
+  - serverless-wsgi
+
+custom:
+  wsgi:
+    app: app.app
+    packRequirements: false
+  pythonRequirements:
+    dockerizePip: non-linux
+    pythonBin: python3
+    slim: true
+    strip: false
+package:
+  exclude:
+    - node_modules/**
+    - venv/**
+
+provider:
+  name: aws
+  runtime: python3.6
+  stage: dev
+  region: us-east-1
+  deploymentBucket: evandangol
+  iamRoleStatements:
+    - Effect: Allow
+      Action: 
+        - sns:Publish        
+      Resource: "*"
+    - Effect: Allow
+      Action: 
+        - s3:*        
+      Resource: "*"
+    - Effect: Allow
+      Action:
+        - ses:SendEmail
+        - ses:SendRawEmail
+      Resource : "*"
+
+functions:
+  app:
+    handler: wsgi_handler.handler
+    events:
+      - httpApi: "*"
+     
